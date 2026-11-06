@@ -33,21 +33,19 @@ python exp2_failure_cases.py --images_dir data/failure_cases --out_dir results/e
 
 Without a prompt file, the click is the image centre and the box is the middle 50% of the image, not a tight box around the object.
 
-`data/failure_cases/` only has the original pigeon photo. The other failure-case photos are not in this repo, but their results are in `results/exp2/`.
-
 ## Results
 
-Prompt sensitivity, averaged over the 18 photos. Agreement is the mean IoU with the box mask.
+Prompt sensitivity, averaged over the 18 photos, from `results/exp1/exp1_results.csv`. Agreement is the mean IoU with the box mask.
 
 | Prompt | Agreement with box |
 |---|---|
 | 1 point | 0.26 |
 | 3 points | 0.36 |
-| Box + point | 0.79 |
+| Box + point | 0.76 |
 
-Mean predicted IoU was 0.82 for 1 point and 0.61 for the box.
+Mean predicted IoU was 0.81 for 1 point and 0.61 for the box.
 
-Failure cases, with one point prompt per image. Predicted IoU is SAM 2's own score, not measured accuracy, so a high score can still be the wrong object. `data/prompts.json` has the deck click, and the bird click was not saved.
+Failure cases, with one point prompt per image. Predicted IoU is SAM 2's own score, not measured accuracy, so a high score can still be the wrong object. `data/prompts.json` has the deck click, and the bird click was not saved. These scores match the overlays in `results/exp2/`. A later re-run changed three of them by up to 0.03.
 
 | Image | Predicted IoU |
 |---|---|
@@ -59,7 +57,8 @@ Failure cases, with one point prompt per image. Predicted IoU is SAM 2's own sco
 | Frosted water bottle | 0.73 |
 | Glass window | 0.96 |
 | Tinted green mug | 0.20 |
-| Hose sculpture | 0.14 |
+| Hose sculpture, `.webp` photo | 0.11 |
+| Hose sculpture, `.jpg` photo | 0.14 |
 | Distant pigeons, click on the bird | 0.93 |
 | Distant pigeons, click on the deck | 0.98 |
 
@@ -70,7 +69,8 @@ utils.py                     model loading, overlays, IoU, grids
 exp1_prompt_sensitivity.py   experiment 1
 exp2_failure_cases.py        experiment 2
 data/prompt_images/          18 photos for experiment 1
-data/failure_cases/          original pigeon photo
+data/failure_cases/          photos for experiment 2
 data/prompts.json            click point for the pigeon photo
+results/exp1/                results table and summary chart for experiment 1
 results/exp2/                overlays and grids for experiment 2
 ```
