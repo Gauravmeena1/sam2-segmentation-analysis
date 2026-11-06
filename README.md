@@ -9,7 +9,7 @@ Computer Vision final project. Tests how [SAM 2](https://github.com/facebookrese
 
 ## Setup
 
-Requires Python 3.10+ and an NVIDIA GPU.
+Requires Python 3.10+. An NVIDIA GPU is recommended.
 
 ```bash
 git clone https://github.com/facebookresearch/sam2.git
@@ -31,6 +31,8 @@ python exp1_prompt_sensitivity.py --images_dir data/prompt_images --out_dir resu
 python exp2_failure_cases.py --images_dir data/failure_cases --out_dir results/exp2 --model_size large --mode prompt --prompts_json data/prompts.json
 ```
 
+Without a prompt file, the click is the image centre and the box is the middle 50% of the image, not a tight box around the object.
+
 `data/failure_cases/` only has the original pigeon photo. The other failure-case photos are not in this repo, but their results are in `results/exp2/`.
 
 ## Results
@@ -45,7 +47,7 @@ Prompt sensitivity, averaged over the 18 photos. Agreement is the mean IoU with 
 
 Mean predicted IoU was 0.82 for 1 point and 0.61 for the box.
 
-Failure cases, with one point prompt per image:
+Failure cases, with one point prompt per image. Predicted IoU is SAM 2's own score, not measured accuracy, so a high score can still be the wrong object. `data/prompts.json` has the deck click, and the bird click was not saved.
 
 | Image | Predicted IoU |
 |---|---|
